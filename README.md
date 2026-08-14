@@ -87,7 +87,7 @@ This is a case-specific transcript analysis and should not be interpreted as rep
 
 ## Repository
 
-[GitHub repository](YOUR-GITHUB-REPOSITORY-URL)
+[GitHub repository]
 
 ## Citation
 
