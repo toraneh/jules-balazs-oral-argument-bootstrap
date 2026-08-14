@@ -85,10 +85,6 @@ output/
 
 This is a case-specific transcript analysis and should not be interpreted as representative of Supreme Court oral arguments generally. "Question" is defined simply as a speaking turn containing `?`.
 
-## Repository
-
-[Github Repository](https://github.com/toraneh/jules-balazs-oral-argument-bootstrap)
-
 ## Citation
 
 If you use this work or data in your research, please cite it as:
