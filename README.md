@@ -93,4 +93,4 @@ This is a case-specific transcript analysis and should not be interpreted as rep
 
 If you use this work or data in your research, please cite it as:
 
-> Torane, H. (2026). *Bootstrap Analysis of Speaking Turns in Jules v. Andre Balazs Properties* [Unpublished manuscript]. GitHub. https://github.com/toraneh/jules-balazs-oral-argument-bootstrap
+> Torane, H. (2026). *Bootstrap Analysis of Speaking Turns in Jules v. Andre Balazs Properties* [Unpublished manuscript]
