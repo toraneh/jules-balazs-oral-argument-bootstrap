@@ -87,7 +87,7 @@ This is a case-specific transcript analysis and should not be interpreted as rep
 
 ## Repository
 
-[https://github.com/toraneh/jules-balazs-oral-argument-bootstrap](https://github.com/toraneh/jules-balazs-oral-argument-bootstrap)
+[Github Repository](https://github.com/toraneh/jules-balazs-oral-argument-bootstrap)
 
 ## Citation
 
