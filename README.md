@@ -91,4 +91,8 @@ This is a case-specific transcript analysis and should not be interpreted as rep
 
 ## Citation
 
+If you use this work or data in your research, please cite it as:
+
+> Harsh, T. (2026). *Bootstrap Analysis of Speaking Turns in Jules v. Andre Balazs Properties* [Unpublished manuscript]. GitHub. https://github.com/toraneh/jules-balazs-oral-argument-bootstrap
+
 Torane, Harsh. *Jules v. Andre Balazs Properties: Transcript Bootstrap Analysis*. 2026.
