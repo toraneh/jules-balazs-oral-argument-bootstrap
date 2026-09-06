@@ -76,9 +76,7 @@ A simple, reproducible bootstrap analysis of the *Jules v. Andre Balazs Properti
 
 ## 6. Data and Reproducibility
 
-All analysis code and generated results are available in the accompanying GitHub repository:
-
-https://github.com/toraneh/jules-balazs-oral-argument-bootstrap
+All analysis code and generated results are available in the accompanying [GitHub repository](https://github.com/toraneh/jules-balazs-oral-argument-bootstrap).
 
 The official case materials are available from the Supreme Court of the United States, including the official docket and oral-argument transcript.
 
