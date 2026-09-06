@@ -8,21 +8,21 @@ date: "9 August 2026"
 
 This study examines the oral argument transcript in *Jules v. Andre Balazs Properties*, No. 25-83, before the Supreme Court of the United States. The transcript was programmatically cleaned and divided into 225 speaking turns involving 11 identified speakers. Two transcript-level measures were examined: mean words per speaking turn and the percentage of turns containing a question.
 
-A nonparametric bootstrap procedure generated 10,000 resamples of the 225 observed speaking turns. The observed mean speaking-turn length was 82.54 words, while 32.00% of turns contained a question. Across the bootstrap resamples, the mean estimated speaking-turn length was 81.69 words (SD = 33.96; 95% interval = 40.19–157.22), while the mean estimated percentage of question-containing turns was 31.91% (SD = 3.07; 95% interval = 25.78–38.22%).
+A nonparametric bootstrap procedure generated 10,000 resamples of the 225 observed speaking turns. The observed mean speaking-turn length was 82.54 words, and 32.00% of turns contained a question. Across the bootstrap resamples, the mean estimated speaking-turn length was 81.69 words (SD = 33.96; 95% interval = 40.19–157.22), and the mean estimated percentage of question-containing turns was 31.91% (SD = 3.07; 95% interval = 25.78–38.22%).
 
-The results demonstrate the reproducibility and sampling variability of these simple transcript-level measures.
+The results show these two simple transcript-level measures to be reproducible, though they differ notably in sampling variability.
 
 ## 1. Introduction
 
-Oral arguments before the Supreme Court consist of a sequence of exchanges between Justices and attorneys. Basic characteristics of these exchanges, such as speaking-turn length and the frequency with which turns contain questions, can be measured directly from an official transcript.
+Oral arguments before the Supreme Court unfold as a sequence of exchanges between Justices and attorneys. Basic properties of these exchanges — such as speaking-turn length and how often a turn contains a question — can be measured directly from the official transcript.
 
-This study provides a small, reproducible analysis of the oral argument in *Jules v. Andre Balazs Properties*. The purpose is not to predict judicial decisions or model hypothetical oral arguments. Instead, the study asks a narrower question: how stable are two simple transcript-level statistics when the observed speaking turns are repeatedly resampled?
+This study offers a small, reproducible analysis of the oral argument in *Jules v. Andre Balazs Properties*. Its purpose is not to predict judicial outcomes or model hypothetical arguments, but to ask a narrower question: how stable are these two transcript-level statistics under repeated resampling of the observed speaking turns?
 
 ## 2. Data and Method
 
 ### 2.1 Source and Transcript Processing
 
-The analysis uses the official Supreme Court oral-argument transcript for *Jules v. Andre Balazs Properties*, No. 25-83, argued March 30, 2026.
+The analysis draws on the official Supreme Court oral-argument transcript for *Jules v. Andre Balazs Properties*, No. 25-83, argued March 30, 2026.
 
 The transcript was processed in R using the following packages:
 
@@ -32,7 +32,7 @@ The transcript was processed in R using the following packages:
 - `ggplot2`
 - `readr`
 
-The extraction procedure identified actual Justices and attorneys, reconstructed multi-line speaking turns, and removed common PDF and transcript artifacts. The final dataset contained 225 speaking turns involving 11 speakers, with no remaining identified transcript artifacts.
+The extraction procedure identified the Justices and attorneys, reconstructed multi-line speaking turns, and removed common PDF and transcript artifacts. The resulting dataset contained 225 speaking turns across 11 speakers, with no remaining artifacts.
 
 ### 2.2 Measures
 
@@ -43,13 +43,13 @@ Two measures were calculated for each speaking turn:
 
 ### 2.3 Bootstrap Procedure
 
-The observed transcript was bootstrapped 10,000 times. Each resample consisted of 225 speaking turns sampled with replacement from the observed 225 turns. The two statistics were recalculated for every resample.
+The observed transcript was bootstrapped 10,000 times, each resample consisting of 225 speaking turns drawn with replacement from the observed 225. Both statistics were recalculated for every resample.
 
-The analysis used `set.seed(20260808)` to make the bootstrap results reproducible.
+`set.seed(20260808)` was used throughout to make the bootstrap reproducible.
 
 ## 3. Results
 
-The observed transcript contained 225 speaking turns. The mean speaking-turn length was 82.54 words, while the median was 22 words. A total of 72 turns (32.00%) contained a question mark.
+The observed transcript contained 225 speaking turns. Mean speaking-turn length was 82.54 words, with a median of 22 words; 72 turns (32.00%) contained a question mark.
 
 The bootstrap results were:
 
@@ -60,25 +60,25 @@ The bootstrap results were:
 
 ![Bootstrap distribution of mean speaking-turn length across 10,000 resamples of the 225 observed speaking turns.](Figure_1_bootstrap_speaking_turn_length.png)
 
-The bootstrap means were close to the corresponding observed values. The distribution of mean speaking-turn length was considerably wider than the distribution of question-containing turns, reflecting the substantial variation in the lengths of individual speaking turns.
+Both bootstrap means landed close to their observed counterparts, but the distribution of mean speaking-turn length was considerably wider than that of the question-containing rate — a reflection of how much individual turn lengths vary.
 
 ## 4. Discussion
 
-The results show that the two observed transcript measures are reproduced closely on average when the speaking turns are resampled. The observed question-containing rate of 32.00% is particularly close to the bootstrap mean of 31.91%.
+The two transcript measures are reproduced closely on average under resampling, and the observed question-containing rate of 32.00% sits particularly close to the bootstrap mean of 31.91%.
 
-Speaking-turn length shows substantially greater variability. Although the observed mean was 82.54 words, the bootstrap distribution was wide, reflecting the presence of both short and very long turns. The median of 22 words further illustrates the skew created by longer speaking turns.
+Speaking-turn length is far more variable. Although the observed mean was 82.54 words, the bootstrap distribution was wide, reflecting a mix of short and very long turns; the median of 22 words further highlights the skew created by the longer ones.
 
-These results should be interpreted narrowly. The bootstrap does not create 10,000 hypothetical Supreme Court oral arguments. It resamples the 225 observed speaking turns to examine the sampling variability of the calculated statistics. The analysis therefore describes uncertainty around these transcript-level measures rather than making claims about Supreme Court arguments generally.
+These results should be read narrowly. The bootstrap does not generate 10,000 hypothetical oral arguments — it resamples the 225 observed turns to characterize the sampling variability of the calculated statistics. The analysis therefore describes uncertainty in these transcript-level measures rather than making broader claims about Supreme Court arguments generally.
 
 ## 5. Conclusion
 
-A simple, reproducible bootstrap analysis of the *Jules v. Andre Balazs Properties* oral argument produced stable estimates for question frequency while showing greater variability in speaking-turn length. The analysis demonstrates how publicly available Supreme Court transcripts can be converted into structured data and examined using a straightforward statistical procedure.
+This reproducible bootstrap analysis of the *Jules v. Andre Balazs Properties* oral argument found a stable question-frequency estimate alongside much greater variability in speaking-turn length. The exercise demonstrates how publicly available Supreme Court transcripts can be converted into structured data and examined with a straightforward statistical procedure.
 
 ## 6. Data and Reproducibility
 
 All analysis code and generated results are available in the accompanying [GitHub repository](https://github.com/toraneh/jules-balazs-oral-argument-bootstrap).
 
-The official case materials are available from the Supreme Court of the United States, including the official docket and oral-argument transcript.
+The official case materials, including the docket and oral-argument transcript, are available from the Supreme Court of the United States.
 
 The analysis was run using:
 
