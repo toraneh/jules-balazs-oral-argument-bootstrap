@@ -1,0 +1,1 @@
+Figure 1. Bootstrap distribution of mean speaking-turn length across 10,000 resamples of the 225 observed speaking turns. Each bootstrap resample contains 225 speaking turns sampled with replacement. The solid vertical line indicates the observed transcript mean (82.54 words per turn). Dashed vertical lines indicate the 95% bootstrap interval (40.19–157.22 words).
