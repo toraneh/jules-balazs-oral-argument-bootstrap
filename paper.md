@@ -8,7 +8,7 @@ date: "9 August 2026"
 
 This study examines the oral argument transcript in *Jules v. Andre Balazs Properties*, No. 25-83, before the Supreme Court of the United States. The transcript was programmatically cleaned and divided into 225 speaking turns involving 11 identified speakers. Two transcript-level measures were examined: mean words per speaking turn and the percentage of turns containing a question.
 
-A nonparametric bootstrap procedure generated 10,000 resamples of the 225 observed speaking turns. The observed mean speaking-turn length was 82.54 words, and 32.00% of turns contained a question. Across the bootstrap resamples, the mean estimated speaking-turn length was 81.69 words (SD = 33.96; 95% interval = 40.19–157.22), and the mean estimated percentage of question-containing turns was 31.91% (SD = 3.07; 95% interval = 25.78–38.22%).
+A nonparametric bootstrap procedure generated 10,000 resamples of the 225 observed speaking turns. The observed mean speaking-turn length was 82.54 words, and 32.00% of turns contained a question. Across the bootstrap resamples, the mean estimated speaking-turn length was 81.69 words (standard deviation [SD] = 33.96; 95% percentile interval = 40.19–157.22), and the mean estimated percentage of question-containing turns was 31.91% (SD = 3.07; 95% percentile interval = 25.78–38.22%).
 
 The results show these two simple transcript-level measures to be reproducible, though they differ notably in sampling variability.
 
@@ -53,7 +53,7 @@ The observed transcript contained 225 speaking turns. Mean speaking-turn length 
 
 The bootstrap results were:
 
-| Measure | Observed | Bootstrap Mean | SD | 95% Interval |
+| Measure | Observed | Bootstrap Mean | SD | 95% Percentile Interval |
 |:--|--:|--:|--:|--:|
 | Mean words per speaking turn | 82.54 | 81.69 | 33.96 | 40.19–157.22 |
 | Question-containing turns (%) | 32.00% | 31.91% | 3.07 | 25.78–38.22% |
