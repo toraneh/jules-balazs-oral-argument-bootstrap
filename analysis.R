@@ -834,7 +834,7 @@ plot1 <- ggplot(
   ) +
 
   ##########################################################
-  # PUBLICATION-FRIENDLY THEME
+  # Author prefers this theme
   ##########################################################
 
   theme_classic(
