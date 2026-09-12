@@ -78,7 +78,7 @@ output/
 ├── extracted_speaking_turns.csv
 ├── 10000_simulation_results.csv
 ├── simulation_summary.csv
-└── Figure_1_bootstrap_speaking_turn_length.png
+└── Figure_1.png
 ```
 
 ## Limitation
