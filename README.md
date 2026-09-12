@@ -1,77 +1,93 @@
-# Simulating Variation in YouTube View Counts: A Civic-Data Simulation Using Sansad TV
+# Jules v. Andre Balazs Properties: Transcript Bootstrap Analysis
 
-A small, reproducible simulation study exploring variation around an observed YouTube view count from Sansad TV. The project uses a Poisson model as an exploratory baseline and demonstrates how publicly observable digital engagement metrics can be used for statistical exploration and civic-data literacy.
+Reproducible R analysis of the oral argument transcript in **Jules v. Andre Balazs Properties, No. 25-83**, before the Supreme Court of the United States.
 
-## Overview
+The project extracts speaking turns from the official transcript and performs exactly **10,000 bootstrap resamples** of those turns.
 
-This project examines variation around an observed YouTube view count of **3,306 views** for the video:
+## Case and Source
 
-*RS | Monsoon Session 2026 | Question Hour | Time: 12:00 PM -12:04 PM | 07 August, 2026*
+**Jules v. Andre Balazs Properties, et al.**
+Supreme Court of the United States, No. 25-83
+Argued March 30, 2026
 
-Sansad TV provides public access to parliamentary proceedings and related programming through digital platforms, including YouTube. Publicly visible engagement metrics such as view counts provide a simple starting point for computational exploration.
+Official sources:
 
-The simulation is intended as a **descriptive proof-of-concept**, not as a prediction of future views or a measure of civic participation.
+* [U.S. Supreme Court — Docket No. 25-83](https://www.supremecourt.gov/docket/docketfiles/html/public/25-83.html)
+* [U.S. Supreme Court — Oral Argument](https://www.supremecourt.gov/oral_arguments/audio/2025/25-83)
+* [U.S. Supreme Court — Oral Argument Transcripts](https://www.supremecourt.gov/oral_arguments/argument_transcript/2025)
+* [U.S. Supreme Court — Opinion](https://www.supremecourt.gov/opinions/25pdf/25-83_3e04.pdf)
 
-## Simulation
+## Analysis
 
-The simulation was conducted in **R 4.5.0** using:
+The transcript is cleaned and divided into individual speaking turns. The analysis measures:
 
-* **10,000** simulated observations
-* Poisson mean (`lambda`) = **3,306**
-* Random seed = **123**
+1. Mean words per speaking turn
+2. Percentage of speaking turns containing a question mark
 
-The simulation calculates the mean, standard deviation, minimum, maximum, and empirical 95% simulation interval.
+Each bootstrap simulation samples **225 speaking turns with replacement** and recalculates both measures.
+
+The analysis therefore estimates the variability of statistics from the observed transcript; it does **not** generate 10,000 hypothetical oral arguments.
 
 ## Results
 
-The simulation produced:
+The cleaned transcript contained:
 
-| Statistic              |      Result |
-| ---------------------- | ----------: |
-| Observed views         |       3,306 |
-| Simulated mean         |   3,304.636 |
-| Standard deviation     |      57.003 |
-| Minimum                |       3,086 |
-| Maximum                |       3,527 |
-| Empirical 95% interval | 3,192–3,416 |
+* **225** speaking turns
+* **11** identified speakers
+* **0** remaining transcript artifacts
 
-The results are descriptive. They should not be interpreted as evidence that YouTube view counts generally follow a Poisson distribution.
+| Measure                   | Observed | Bootstrap Mean |    SD | 95% Interval |
+| ------------------------- | -------: | -------------: | ----: | -----------: |
+| Mean words per turn       |    82.54 |          81.69 | 33.96 | 40.19–157.22 |
+| Question-containing turns |   32.00% |         31.91% |  3.07 | 25.78–38.22% |
 
-## Civic-Data Context
+The analysis uses `set.seed(20260808)` and exactly **10,000** bootstrap simulations.
 
-The project explores a simple connection between **parliamentary media, publicly observable digital engagement, and reproducible statistical reasoning**.
+## Reproduction
 
-The simulation demonstrates how an observed public metric can be transformed into an accessible statistical exercise. This approach may have applications in civic-data literacy, allowing citizens, students, educators, and researchers to explore concepts such as distributions, variation, uncertainty, and reproducibility using real-world public data.
+Requirements:
 
-The present study uses only one video and one observation. It therefore does not establish general patterns of audience engagement with Sansad TV or parliamentary content. Future research could extend the framework to multiple videos, longitudinal observations, different parliamentary sessions, and alternative statistical models.
+* R 4.5.0
+* `pdftools`
+* `stringr`
+* `dplyr`
+* `ggplot2`
+* `readr`
 
-## Repository Contents
+Repository structure:
 
-* `paper.pdf` — PDF version of the paper
-* `paper.md` — Markdown source
-* `analysis.R` — R code used for the simulation and Figure 1
-* `figure_1_view_count_distribution.png` — Figure 1
+```text
+jules-scotus-transcript-bootstrap/
+├── data/
+│   └── transcript.pdf
+├── output/
+├── analysis.R
+└── README.md
+```
 
-## Reproducibility
+Run:
 
-To reproduce the simulation, open `analysis.R` in **R 4.5.0** or a compatible version of R and run the script.
+```r
+source("analysis.R")
+```
 
-The simulation uses random seed `123` to ensure reproducibility.
+The script produces:
 
-## Data Source
+```text
+output/
+├── extracted_speaking_turns.csv
+├── 10000_simulation_results.csv
+├── simulation_summary.csv
+└── Figure_1_bootstrap_speaking_turn_length.png
+```
 
-The observed count comes from the following YouTube video:
+## Limitation
 
-*RS | Monsoon Session 2026 | Question Hour | Time: 12:00 PM -12:04 PM | 07 August, 2026*
-
-YouTube (2026).
+This is a case-specific transcript analysis and should not be interpreted as representative of Supreme Court oral arguments generally. "Question" is defined simply as a speaking turn containing `?`.
 
 ## Citation
 
 If you use this work or data in your research, please cite it as:
 
-> Torane, H. “Simulating Variation in YouTube View Counts: A Civic-Data Simulation Using Sansad TV”. Preprint, Zenodo, September 11, 2026. https://doi.org/10.5281/zenodo.22234219
-
-## License
-
-Unless otherwise specified, the accompanying code and materials are provided for research and educational use.
+> Torane, H. (2026). Bootstrap Analysis of Speaking Turns in Jules v. Andre Balazs Properties [Preprint]. Law Archive.
+https://doi.org/10.31219/osf.io/5akpj_v1
