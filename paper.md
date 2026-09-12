@@ -1,92 +1,54 @@
 ---
-title: "Bootstrap Analysis of Speaking Turns in *Jules v. Andre Balazs Properties*"
+title: "Simulating Variation in YouTube View Counts: A Civic-Data Simulation Using Sansad TV"
 author: "Harsh Torane"
 date: "9 August 2026"
+header-includes: |
+  \usepackage{graphicx}
+  \usepackage{float}
 ---
 
 ## Abstract
 
-This study examines the oral argument transcript in *Jules v. Andre Balazs Properties*, No. 25-83, before the Supreme Court of the United States. The transcript was programmatically cleaned and divided into 225 speaking turns involving 11 identified speakers. Two transcript-level measures were examined: mean words per speaking turn and the percentage of turns containing a question.
+Digital platforms give citizens growing access to parliamentary proceedings, along with publicly visible measures of audience attention. Sansad TV, India's parliamentary television channel, distributes its content through platforms including YouTube, opening a simple avenue for computational approaches to engagement data. This brief simulation study illustrates one such approach using a single observed YouTube view count.
 
-A nonparametric bootstrap procedure generated 10,000 resamples of the 225 observed speaking turns. The observed mean speaking-turn length was 82.54 words, and 32.00% of turns contained a question. Across the bootstrap resamples, the mean estimated speaking-turn length was 81.69 words (standard deviation [SD] = 33.96; 95% percentile interval = 40.19–157.22), and the mean estimated percentage of question-containing turns was 31.91% (SD = 3.07; 95% percentile interval = 25.78–38.22%).
+The video *RS | Monsoon Session 2026 | Question Hour | Time: 12:00 PM–12:04 PM | 07 August, 2026* had **3,306 views** at the time of observation. Using R 4.5.0, 10,000 view counts were simulated from a Poisson distribution with an expected value of 3,306. The simulated mean was **3,304.6 views**, with an empirical 95% simulation interval of **3,192–3,416 views**. The exercise does not predict future views or claim that YouTube engagement follows a Poisson process. It instead shows how reproducible simulation can turn a single, publicly observable metric into an accessible example of statistical variation and civic-data literacy.
 
-The results show these two simple transcript-level measures to be reproducible, though they differ notably in sampling variability.
+## Introduction
 
-## 1. Introduction
+Public access to parliamentary information is a meaningful part of democratic participation. Sansad TV provides such access through television and digital platforms, including recordings of proceedings like Question Hour. Digital distribution also leaves behind engagement measures that anyone can observe, such as YouTube view counts.
 
-Oral arguments before the Supreme Court unfold as a sequence of exchanges between Justices and attorneys. Basic properties of these exchanges — such as speaking-turn length and how often a turn contains a question — can be measured directly from the official transcript.
+A view count is not a direct measure of civic participation, political attitudes, or democratic impact. It can, however, serve as a concrete starting point for statistical exploration. Simulation offers one way to move past treating an observed count as a fixed number, by showing what variation around that observation might look like under an explicitly stated model.
 
-This study offers a small, reproducible analysis of the oral argument in *Jules v. Andre Balazs Properties*. Its purpose is not to predict judicial outcomes or model hypothetical arguments, but to ask a narrower question: how stable are these two transcript-level statistics under repeated resampling of the observed speaking turns?
+This study presents a small proof of concept using one Sansad TV video. Its purpose is descriptive and methodological rather than predictive: to demonstrate a transparent, reproducible approach that could later be extended to larger collections of parliamentary videos and engagement data.
 
-## 2. Data and Method
+## Method
 
-### 2.1 Source and Transcript Processing
+A Poisson model served as a simple exploratory baseline for simulating variation around the observed count of **3,306 views**. The Poisson distribution is a natural fit for integer-valued count data, though a single observation cannot establish that YouTube view counts actually follow this distribution.
 
-The analysis draws on the official Supreme Court oral-argument transcript for *Jules v. Andre Balazs Properties*, No. 25-83, argued March 30, 2026.
+Using **R 4.5.0** (base R only; no additional packages were required), random seed `123`, and an expected value of 3,306, **10,000 observations** were simulated. The mean, standard deviation, minimum, maximum, and empirical 95% simulation interval were then calculated, with the interval defined by the 2.5th and 97.5th percentiles.
 
-The transcript was processed in R using the following packages:
+## Results
 
-- `pdftools`
-- `stringr`
-- `dplyr`
-- `ggplot2`
-- `readr`
+The simulated mean was **3,304.6 views**, with a standard deviation of **57.0 views**. Values ranged from **3,086 to 3,527 views**, and the empirical 95% simulation interval was **3,192–3,416 views**. The simulated distribution was centered closely around the observed value of 3,306 views.
 
-The extraction procedure identified the Justices and attorneys, reconstructed multi-line speaking turns, and removed common PDF and transcript artifacts. The resulting dataset contained 225 speaking turns across 11 speakers, with no remaining artifacts.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figure_1.png}
+\caption{Distribution of 10,000 simulated YouTube view counts under the Poisson model. The red vertical line marks the observed count of 3,306 views, and the dashed gray line marks the simulated mean.}
+\end{figure}
 
-### 2.2 Measures
+## Discussion and Conclusion
 
-Two measures were calculated for each speaking turn:
+The simulation shows how a publicly visible digital engagement metric can anchor a reproducible statistical exercise. Rather than treating the observed count as an isolated number, simulation offers an accessible way to explore variation under an explicitly stated model.
 
-- Number of words in the turn.
-- Whether the turn contained a question mark (`?`).
+This approach has some value for **civic-data literacy**. Parliamentary videos and their engagement metrics give citizens, students, educators, and researchers concrete material for exploring uncertainty, distributions, and reproducible quantitative reasoning. The present study should still be read as a proof of concept: it rests on one video and one observation, and the Poisson assumption is illustrative rather than empirically validated.
 
-### 2.3 Bootstrap Procedure
+Future work could extend the framework to multiple Sansad TV videos and longitudinal observations, comparing engagement across sessions, topics, video characteristics, and time, and testing alternative models against the Poisson baseline.
 
-The observed transcript was bootstrapped 10,000 times, each resample consisting of 225 speaking turns drawn with replacement from the observed 225. Both statistics were recalculated for every resample.
+## Reference
 
-`set.seed(20260808)` was used throughout to make the bootstrap reproducible.
+YouTube. (2026). *RS | Monsoon Session 2026 | Question Hour | Time: 12:00 PM -12:04 PM | 07 August, 2026* [Video]. YouTube. https://www.youtube.com/watch?v=mfZ5GKz2yjY
 
-## 3. Results
+## Code Availability
 
-The observed transcript contained 225 speaking turns. Mean speaking-turn length was 82.54 words, with a median of 22 words; 72 turns (32.00%) contained a question mark.
-
-The bootstrap results were:
-
-| Measure | Observed | Bootstrap Mean | SD | 95% Percentile Interval |
-|:--|--:|--:|--:|--:|
-| Mean words per speaking turn | 82.54 | 81.69 | 33.96 | 40.19–157.22 |
-| Question-containing turns (%) | 32.00% | 31.91% | 3.07 | 25.78–38.22% |
-
-![Bootstrap distribution of mean speaking-turn length across 10,000 resamples of the 225 observed speaking turns.](Figure_1_bootstrap_speaking_turn_length.png)
-
-Both bootstrap means landed close to their observed counterparts, but the distribution of mean speaking-turn length was considerably wider than that of the question-containing rate — a reflection of how much individual turn lengths vary.
-
-## 4. Discussion
-
-The two transcript measures are reproduced closely on average under resampling, and the observed question-containing rate of 32.00% sits particularly close to the bootstrap mean of 31.91%.
-
-Speaking-turn length is far more variable. Although the observed mean was 82.54 words, the bootstrap distribution was wide, reflecting a mix of short and very long turns; the median of 22 words further highlights the skew created by the longer ones.
-
-These results should be read narrowly. The bootstrap does not generate 10,000 hypothetical oral arguments — it resamples the 225 observed turns to characterize the sampling variability of the calculated statistics. The analysis therefore describes uncertainty in these transcript-level measures rather than making broader claims about Supreme Court arguments generally.
-
-## 5. Conclusion
-
-This reproducible bootstrap analysis of the *Jules v. Andre Balazs Properties* oral argument found a stable question-frequency estimate alongside much greater variability in speaking-turn length. The exercise demonstrates how publicly available Supreme Court transcripts can be converted into structured data and examined with a straightforward statistical procedure.
-
-## 6. Data and Reproducibility
-
-All analysis code and generated results are available in the accompanying [GitHub repository](https://github.com/toraneh/jules-balazs-oral-argument-bootstrap).
-
-The official case materials, including the docket and oral-argument transcript, are available from the Supreme Court of the United States.
-
-The analysis was run using:
-
-- **R:** 4.5.0
-- **Poppler:** 25.03.0
-- **Bootstrap resamples:** 10,000
-- **Random seed:** `20260808`
-- **Observed speaking turns:** 225
-- **Identified speakers:** 11
-
-The reported results are based on the processed transcript and the bootstrap procedure described above.
+The R code used to generate the simulation and Figure 1 is available in the accompanying [GitHub repository](https://github.com/toraneh/simulating-variation-in-youtube-view-count).
