@@ -75,4 +75,4 @@ This analysis is specific to a single Supreme Court oral argument and should not
 
 If you use this analysis, code, or derived data, please cite it as:
 
-> Torane, H. (2026). Bootstrap analysis of speaking turns in *Jules v. Andre Balazs Properties*. Retrieved from https://doi.org/10.31219/osf.io/5akpj_v1
+> > Torane, H. (2026). Bootstrap Analysis of Speaking Turns in Jules v. Andre Balazs Properties [Preprint]. Law Archive. https://doi.org/10.31219/osf.io/5akpj_v1
