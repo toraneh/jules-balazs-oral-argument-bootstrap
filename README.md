@@ -69,7 +69,7 @@ The script generates the following outputs in the `output/` directory:
 
 ## Scope and Limitations
 
-This analysis is specific to a single Supreme Court oral argument and should not be generalized to the broader population of oral arguments. A "question" is operationalized as any speaking turn containing a question mark character (?). This simple lexical definition may misclassify some utterances (e.g., rhetorical questions, questions embedded in other speech forms). Users are encouraged to adapt the definition for alternative analytical purposes.
+This analysis is specific to a single Supreme Court oral argument and should not be generalized to the broader population of oral arguments. A "question" is operationalized as any speaking turn containing a question mark character (?). This simple lexical definition may misclassify some utterances (e.g., rhetorical questions, questions embedded in other speech forms). Researchers are encouraged to adapt the definition for alternative analytical purposes in future research.
 
 ## Citation
 
