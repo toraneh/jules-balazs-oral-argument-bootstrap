@@ -1,63 +1,52 @@
-# Jules v. Andre Balazs Properties: Transcript Bootstrap Analysis
+# Bootstrap Analysis of Speaking Turns in Jules v. Andre Balazs Properties
 
-Reproducible R analysis of the oral argument transcript in **Jules v. Andre Balazs Properties, No. 25-83**, before the Supreme Court of the United States.
+This repository contains a fully reproducible R implementation of bootstrap resampling analysis applied to the oral argument transcript in *Jules v. Andre Balazs Properties*, No. 25-83 (U.S. Supreme Court). The analysis extracts speaking turns from the official transcript and performs 10,000 bootstrap simulations to estimate the sampling variability of two key measures.
 
-The project extracts speaking turns from the official transcript and performs exactly **10,000 bootstrap resamples** of those turns.
-
-## Case and Source
+## Case Information and Sources
 
 **Jules v. Andre Balazs Properties, et al.**
-Supreme Court of the United States, No. 25-83
-Argued March 30, 2026
+- **Citation:** No. 25-83, U.S. Supreme Court
+- **Argument Date:** March 30, 2026
 
 Official sources:
+- [Supreme Court Docket No. 25-83](https://www.supremecourt.gov/docket/docketfiles/html/public/25-83.html)
+- [Oral Argument Audio](https://www.supremecourt.gov/oral_arguments/audio/2025/25-83)
+- [Oral Argument Transcripts](https://www.supremecourt.gov/oral_arguments/argument_transcript/2025)
+- [Opinion](https://www.supremecourt.gov/opinions/25pdf/25-83_3e04.pdf)
 
-* [U.S. Supreme Court — Docket No. 25-83](https://www.supremecourt.gov/docket/docketfiles/html/public/25-83.html)
-* [U.S. Supreme Court — Oral Argument](https://www.supremecourt.gov/oral_arguments/audio/2025/25-83)
-* [U.S. Supreme Court — Oral Argument Transcripts](https://www.supremecourt.gov/oral_arguments/argument_transcript/2025)
-* [U.S. Supreme Court — Opinion](https://www.supremecourt.gov/opinions/25pdf/25-83_3e04.pdf)
+## Methodology
 
-## Analysis
+The official Supreme Court oral argument transcript was cleaned to extract individual speaking turns. Bootstrap resampling estimates the sampling distribution of two measures:
 
-The transcript is cleaned and divided into individual speaking turns. The analysis measures:
+1. **Mean words per speaking turn:** Average length of spoken contributions.
+2. **Percentage of question-containing turns:** Frequency of interrogative speech in oral argument.
 
-1. Mean words per speaking turn
-2. Percentage of speaking turns containing a question mark
-
-Each bootstrap simulation samples **225 speaking turns with replacement** and recalculates both measures.
-
-The analysis therefore estimates the variability of statistics from the observed transcript; it does **not** generate 10,000 hypothetical oral arguments.
+Each of 10,000 bootstrap samples resamples 225 speaking turns with replacement and recalculates both measures. This approach provides confidence intervals and standard errors reflecting the uncertainty inherent in the observed transcript data. The analysis does not generate hypothetical arguments; it characterizes the observed data's variability.
 
 ## Results
 
-The cleaned transcript contained:
+The cleaned transcript comprises 225 speaking turns from 11 identified speakers with 0 remaining transcript artifacts.
 
-* **225** speaking turns
-* **11** identified speakers
-* **0** remaining transcript artifacts
+| Measure                           | Observed Value | Bootstrap Mean |    SD | 95% CI       |
+|:----------------------------------|--------------:|---------------:|------:|:-------------|
+| Mean words per turn               | 82.54         | 81.69          | 33.96 | 40.19–157.22 |
+| Question-containing turns (%)     | 32.00%        | 31.91%         |  3.07 | 25.78–38.22% |
 
-| Measure                   | Observed | Bootstrap Mean |    SD | 95% Interval |
-| ------------------------- | -------: | -------------: | ----: | -----------: |
-| Mean words per turn       |    82.54 |          81.69 | 33.96 | 40.19–157.22 |
-| Question-containing turns |   32.00% |         31.91% |  3.07 | 25.78–38.22% |
+Analysis uses `set.seed(20260808)` for reproducibility across exactly 10,000 bootstrap iterations.
 
-The analysis uses `set.seed(20260808)` and exactly **10,000** bootstrap simulations.
+## Computational Requirements and Reproduction
 
-## Reproduction
+**R Version and Dependencies:**
+- R ≥ 4.5.0
+- pdftools
+- stringr
+- dplyr
+- ggplot2
+- readr
 
-Requirements:
-
-* R 4.5.0
-* `pdftools`
-* `stringr`
-* `dplyr`
-* `ggplot2`
-* `readr`
-
-Repository structure:
-
+**Repository Structure:**
 ```text
-jules-scotus-transcript-bootstrap/
+jules-balazs-oral-argument-bootstrap/
 ├── data/
 │   └── transcript.pdf
 ├── output/
@@ -65,29 +54,25 @@ jules-scotus-transcript-bootstrap/
 └── README.md
 ```
 
-Run:
-
+**To Reproduce:**
+Execute the analysis with:
 ```r
 source("analysis.R")
 ```
 
-The script produces:
+**Output Files:**
+The script generates the following outputs in the `output/` directory:
+- `extracted_speaking_turns.csv` — Cleaned speaking turn data
+- `10000_simulation_results.csv` — Full bootstrap simulation results
+- `simulation_summary.csv` — Summary statistics across bootstrap samples
+- `Figure_1.png` — Visualization of bootstrap distributions
 
-```text
-output/
-├── extracted_speaking_turns.csv
-├── 10000_simulation_results.csv
-├── simulation_summary.csv
-└── Figure_1.png
-```
+## Scope and Limitations
 
-## Limitation
-
-This is a case-specific transcript analysis and should not be interpreted as representative of Supreme Court oral arguments generally. "Question" is defined simply as a speaking turn containing `?`.
+This analysis is specific to a single Supreme Court oral argument and should not be generalized to the broader population of oral arguments. A "question" is operationalized as any speaking turn containing a question mark character (?). This simple lexical definition may misclassify some utterances (e.g., rhetorical questions, questions embedded in other speech forms). Users are encouraged to adapt the definition for alternative analytical purposes.
 
 ## Citation
 
-If you use this work or data in your research, please cite it as:
+If you use this analysis, code, or derived data, please cite it as:
 
-> Torane, H. (2026). Bootstrap Analysis of Speaking Turns in Jules v. Andre Balazs Properties [Preprint]. Law Archive.
-https://doi.org/10.31219/osf.io/5akpj_v1
+> Torane, H. (2026). Bootstrap analysis of speaking turns in *Jules v. Andre Balazs Properties*. Retrieved from https://doi.org/10.31219/osf.io/5akpj_v1
